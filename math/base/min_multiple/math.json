@@ -1,0 +1,8 @@
+{
+	"key": "~",
+	"name": "min common multiple",
+	"title": "最小公倍数",
+	"group": "fraction",
+	"type": "base",
+	"func_file": "./index.js"
+}

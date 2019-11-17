@@ -1,0 +1,33 @@
+{
+  "name": "mm_maths",
+  "version": "1.0.0",
+  "description": "这是一个可以将数学公式推导变形，并转成js和计算的模块。",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qiuwenwu/mm_maths.git"
+  },
+  "keywords": [
+    "math",
+    "array",
+    "number",
+    "identities",
+    "expression",
+    "set",
+    "convert",
+    "symbol",
+    "$"
+  ],
+  "author": "邱文武",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qiuwenwu/mm_maths/issues"
+  },
+  "homepage": "https://github.com/qiuwenwu/mm_maths#readme",
+  "dependencies": {
+    "mm_expand": "^1.3.2"
+  }
+}
