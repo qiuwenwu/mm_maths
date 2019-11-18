@@ -30,13 +30,21 @@ function plus_subtract(expression) {
 		}
 		if (isNaN(k)) {
 			if (/^[0-9]+$/.test(k.replace(/\//g, ''))) {
-				var v = k.replace(/[a-zA-Z]/, '');
-				var m = Number((v).left('/'));
-				var d = Number((v).right('/'));
-				var o = denominator(divide, d);
-				multiply += o.multiply;
-				divide *= o.divide;
+				// 
+				var m = Number((k).left('/', true));
+				var right = (k).right('/');
+				var d = 1;
+				if(right)
+				{
+					d = Number(right);
+				}
+				multiply = multiply * d + m * divide;
+				divide = divide * d;
+				var o = denominator(multiply, divide);
+				multiply = o.multiply;
+				divide = o.divide;
 			} else {
+				// console.log(val);
 				if (/[0-9]/.test(k) && k.indexOf('^') === -1 && k.indexOf('/') === -1) {
 					var ar_k = k.match(/[a-zA-Z]+/);
 					var ar_n = k.split(/[a-zA-Z]+/);

@@ -8,8 +8,10 @@ const denominator = require('../../math/base/denominator');
 function multiply_divide(expression) {
 	expres = expression.replace(/ /g, '').replace(/\*/g, ' *').replace(/\//g, ' /');
 	var arr = expres.split(' ');
+	// 统计代数
 	var dict = {};
 	var exp = "";
+	// 乘*乘 / (除 * 除)
 	var multiply = 1;
 	var divide = 1;
 	// 统计代数个数
@@ -17,19 +19,32 @@ function multiply_divide(expression) {
 		var k = str.replace('*', '').replace('/', '');
 		k = k.left('^', true);
 		if (isNaN(k)) {
+			// 次方加减
 			if (str.indexOf('^') !== -1) {
 				var n = Number(str.right('^'));
-				if (!dict.hasOwnProperty(k)) {
-					if (str.indexOf('/') !== -1) {
-						dict[k] = -n;
-					} else {
-						dict[k] = n;
+				var ar = k.match(/[a-zA-Z]/);
+				for (var i = 0; i < ar.length; i++) {
+					var ki = ar[i];
+					if (!dict.hasOwnProperty(ki)) {
+						dict[ki] += 0;
 					}
-				} else {
 					if (str.indexOf('/') !== -1) {
-						dict[k] += -n;
+						dict[ki] += -1;
 					} else {
-						dict[k] += n;
+						dict[ki] += 1;
+					}
+				}
+				var ar = k.split(/[a-zA-Z]+/);
+				for (var i = 0; i < ar.length; i++) {
+					var m = ar[i];
+					if (str.indexOf('/') !== -1) {
+						if (multiply % m === 0) {
+							multiply = multiply / m;
+						} else {
+							divide = divide * m;
+						}
+					} else {
+						multiply = multiply * m;
 					}
 				}
 			} else {
@@ -41,7 +56,8 @@ function multiply_divide(expression) {
 							var txt = ar[i];
 							if (txt) {
 								var m = Number(txt);
-								if (str.indexOf('/') != -1) {
+								// 让乘数相乘，除数相乘
+								if (str.indexOf('/') !== -1) {
 									if (multiply % m === 0) {
 										multiply = multiply / m;
 									} else {
@@ -53,8 +69,9 @@ function multiply_divide(expression) {
 							}
 						}
 					}
-					var ar_k = k.match(/[a-zA-Z]+/g, '');
+					var ar_k = k.match(/[a-zA-Z]/g, '');
 					if (ar_k) {
+						// 增减代数次方
 						for (var i = 0; i < ar_k.length; i++) {
 							var v = ar_k[i];
 							if (!dict.hasOwnProperty(v)) {
@@ -68,7 +85,7 @@ function multiply_divide(expression) {
 						}
 					}
 				} else {
-					if (!dict.hasOwnProperty(v)) {
+					if (!dict.hasOwnProperty(k)) {
 						dict[k] = 0;
 					}
 					if (str.indexOf('/') !== -1) {
@@ -151,8 +168,7 @@ function multiply_divide(expression) {
 			result = left + '/' + right;
 		} else {
 			result = left;
-			if(!result)
-			{
+			if (!result) {
 				result = "1";
 			}
 		}

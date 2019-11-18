@@ -5,4 +5,8 @@ const plus_subtract = require('./index');
 // console.log(plus_subtract('4+a/2*a+4/c'));
 
 // console.log(plus_subtract('4+a/2a*2a/a'));
-console.log(plus_subtract('4+a/2a + 1/7+1/7'));
+// console.log(plus_subtract('4+a/2a + 1/7+1/7'));
+// console.log(plus_subtract('4+a/7a + a/8a'));
+// console.log(plus_subtract('4+a/7a + ab/8a'));
+
+console.log(plus_subtract('4+a/7a + ab/8a^2'));
