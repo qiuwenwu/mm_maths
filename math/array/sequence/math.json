@@ -1,0 +1,8 @@
+{
+	"key": "sequence",
+	"name": "sequence value",
+	"title": "数列取值",
+	"group": "fraction",
+	"type": "base",
+	"func_file": "./index.js"
+}

@@ -1,6 +1,7 @@
 /**
  * 最大公约数
- * @param {number} 值
+ * @param {number} a 值
+ * @param {number} b 值
  * @return {number} 返回公约数
  */
 function max_divisor(a, b) {

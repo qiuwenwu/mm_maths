@@ -79,7 +79,7 @@ class Maths {
 		this.subject = "mathematical";
 		
 		/**
-		 *  类型，base基础、geometry几何数学
+		 *  类型，base基础数学、geometry几何数学
 		 */
 		this.type = "base";
 	}
@@ -126,3 +126,5 @@ Maths.prototype.set_know = function(know) {
 	$.push(this.know, know, true);
 };
 
+
+module.exports = Maths;

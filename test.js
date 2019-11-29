@@ -1,6 +1,6 @@
-var Compute = require('./index');
+var Maths = require('./index');
 
-var compute = new Compute(__dirname);
+var compute = new Maths(__dirname);
 
 
 // // 第一步，载入公式
