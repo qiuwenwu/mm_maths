@@ -1,0 +1,8 @@
+{
+	"key": "MACD",
+	"name": "MACD",
+	"title": "异同移动平均线",
+	"group": "stock",
+	"type": "base",
+	"func_file": "./index.js"
+}

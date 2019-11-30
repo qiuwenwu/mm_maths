@@ -1,3 +1,42 @@
-const denominator = require('./index');
-console.log(denominator(4, 18));
-// console.log(denominator(5, 10));
+const reduction = require('./index');
+var arr = [
+	[
+		[
+			[1, 2, 3],
+			[4, 5, 6],
+			[7, 8, 9],
+		],
+		[
+			[2, 3, 4],
+			[5, 6, 7],
+			[8, 9, 10],
+		]
+	],
+	[
+		[
+			[2, 3, 4],
+			[4, 6, 8],
+			[8, 9, 12]
+		],
+		[
+			[3, 4, 5],
+			[6, 8, 10],
+			[9, 12, 15]
+		]
+	],
+	[
+		[
+			[3, 4, 5],
+			[6, 8, 10],
+			[9, 12, 15]
+		],
+		[
+			[9, 12, 15],
+			[6, 8, 10],
+			[3, 4, 5]
+		]
+	]
+];
+
+console.log(reduction(arr, 2));
+console.log(reduction(arr, 1));

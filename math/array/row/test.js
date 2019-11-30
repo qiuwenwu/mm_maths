@@ -1,3 +1,4 @@
-const denominator = require('./index');
-console.log(denominator(4, 18));
-// console.log(denominator(5, 10));
+const row = require('./index');
+var arr = [[15, 35, 68, 66],[38, 35, 68],[25, 35, 22, 33]];
+console.log(row(arr, 2));
+console.log(row(arr, 1));

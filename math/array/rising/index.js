@@ -3,6 +3,6 @@
  * @param {Array} arr
  * @return {Number} 返回最小值
  */
-module.exports = function rising(arr) {
-		
+module.exports = function rising(arr_1, arr_2) {
+	
 };

@@ -1,4 +1,5 @@
 const max_divisor = require('../max_divisor');
+
 /**
  * 最小公倍数
  * @param {number} a 值

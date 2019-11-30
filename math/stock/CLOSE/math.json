@@ -1,0 +1,8 @@
+{
+	"key": "CLOSE",
+	"name": "close price",
+	"title": "取收盘价",
+	"group": "stock",
+	"type": "base",
+	"func_file": "./index.js"
+}

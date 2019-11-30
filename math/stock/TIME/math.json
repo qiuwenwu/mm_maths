@@ -1,0 +1,8 @@
+{
+	"key": "TIME",
+	"name": "time",
+	"title": "取时间",
+	"group": "stock",
+	"type": "base",
+	"func_file": "./index.js"
+}

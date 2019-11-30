@@ -1,7 +1,7 @@
 {
 	"key": "position",
 	"name": "position value",
-	"title": "取坐标值",
+	"title": "数列取值",
 	"group": "fraction",
 	"type": "base",
 	"func_file": "./index.js"

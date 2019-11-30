@@ -1,0 +1,8 @@
+{
+	"key": "LOW",
+	"name": "low price",
+	"title": "取最低价",
+	"group": "stock",
+	"type": "base",
+	"func_file": "./index.js"
+}
