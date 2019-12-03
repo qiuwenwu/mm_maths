@@ -1,5 +1,6 @@
 {
-	"key": "%",
+	"symbol": "%",
+	"key": "percentage",
 	"name": "percentage",
 	"title": "百分比",
 	"func_file": "./index.js"

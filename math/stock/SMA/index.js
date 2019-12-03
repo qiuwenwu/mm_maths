@@ -1,5 +1,5 @@
 
-function SMA(arr, smaLength) {
+module.exports = function SMA(arr, smaLength) {
 	var array, sma = [],
 		i;
 	for (i = smaLength - 1; i >= 0; i--) {
@@ -10,4 +10,3 @@ function SMA(arr, smaLength) {
 	}
 	return sma;
 }
-exports.SMA = SMA;

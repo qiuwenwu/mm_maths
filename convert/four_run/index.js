@@ -1,8 +1,11 @@
+const multiply_divide = require('../multiply_divide');
+const plus_subtract = require('../plus_subtract');
+
 /**
  * @description 四则运算
  * @param {String} expression 公式
  */
-function four_run(expression) {
+module.exports = function four_run(expression) {
 	var express = expression.replace(/ /g, '');
 	var arr = express.replace(/\^\-/g, '^@').replace(/\^\+/g, '^#').split(/[\+\-]/);
 	if (arr.length > 0) {
@@ -11,11 +14,11 @@ function four_run(expression) {
 				if (x.indexOf('^') !== -1) {
 					x = x.replace(/\^@/g, '^-').replace(/\^#/g, '^+');
 				}
-				var ret = to_multiply_divide(x);
+				var ret = multiply_divide(x);
+				console.log(ret);
 				express = express.replace(x, ret);
 			}
 		});
 	}
-	express = to_plus_subtract(express);
-	return express;
+	return plus_subtract(express);
 }

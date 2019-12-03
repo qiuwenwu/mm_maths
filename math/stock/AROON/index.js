@@ -1,6 +1,6 @@
 const min = require('../array/min');
 
-function AROON(higharray, lowarray, period) {
+module.exports = function AROON(higharray, lowarray, period) {
 	var harr = higharray.slice(0, period),
 		larr = lowarray.slice(0, period),
 		hh = min(harr),
@@ -11,5 +11,4 @@ function AROON(higharray, lowarray, period) {
 		up: ((period - hday) / period) * 100,
 		down: ((period - lday) / period) * 100
 	};
-}
-exports.AROON = AROON;
+};

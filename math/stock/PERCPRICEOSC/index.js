@@ -1,4 +1,4 @@
-function PERCPRICEOSC(array, i12, i26, i9) {
+module.exports = function PERCPRICEOSC(array, i12, i26, i9) {
 	var ema12 = EMA(array, 12),
 		ema26 = EMA(array, 26),
 		ppo = [],
@@ -17,4 +17,3 @@ function PERCPRICEOSC(array, i12, i26, i9) {
 		histogram: histogram
 	};
 }
-exports.PERCPRICEOSC = PERCPRICEOSC;

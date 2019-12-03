@@ -6,84 +6,66 @@ const denominator = require('../../math/base/denominator');
  * @param {String} expression 公式
  */
 function plus_subtract(expression) {
-	expres = expression.replace(/ /g, '').replace(/\+/g, ' +').replace(/\-/g, ' -');
+	var expres = expression.replace(/\^\-/g, '^~');
+	expres = expres.replace(/ /g, '').replace(/\+/g, ' +').replace(/\-/g, ' -');
+	expres = expres.replace(/\^~/g, '^-');
 	var arr = expres.split(' ');
+
 	var dict = {};
 	var exp = "";
 	var num = 0;
 
 	var multiply = 0;
 	var divide = 1;
+
 	// 统计代数个数
 	arr.map(function(x) {
-		var k = x.replace('+', '').replace('-', '');
-		var val = "";
-		if (k.indexOf('*') !== -1 || k.indexOf('/') !== -1) {
-			k = multiply_divide(k);
-			if (x.indexOf('-') === -1) {
-				val = k;
-			} else {
-				val = '-' + k;
-			}
+		if (/[a-zA-Z]/.test(x)) {
+			var exp = x;
+			// if (exp.indexOf("^") !== -1) {
+			// 	var mh = exp.match(/[a-zA-Z]\^[0-9]+/);
+			// 	if (mh) {
+			// 		var key = mh[0];
+			// 		var left = key.left("^");
+			// 		var ex = "";
+			// 		var right = key.right("^");
+			// 		var n = Number(right);
+			// 		for (var i = 0; i < n; i++) {
+			// 			ex += " * left;
+			// 		}
+			// 		var value = eval(ex.replace(' * ', ''));
+			// 		exp = exp.replace(key, value);
+			// 	}
+			// }
+		
 		} else {
-			val = x;
-		}
-		if (isNaN(k)) {
-			if (/^[0-9]+$/.test(k.replace(/\//g, ''))) {
-				// 
-				var m = Number((k).left('/', true));
-				var right = (k).right('/');
-				var d = 1;
-				if(right)
-				{
-					d = Number(right);
-				}
-				multiply = multiply * d + m * divide;
-				divide = divide * d;
-				var o = denominator(multiply, divide);
-				multiply = o.multiply;
-				divide = o.divide;
-			} else {
-				// console.log(val);
-				if (/[0-9]/.test(k) && k.indexOf('^') === -1 && k.indexOf('/') === -1) {
-					var ar_k = k.match(/[a-zA-Z]+/);
-					var ar_n = k.split(/[a-zA-Z]+/);
-					for (var i = 0; i < ar_k.length; i++) {
-						var v = ar_k[i];
-						var str = ar_n[i];
-						var n = 1;
-						if (str) {
-							n = Number(str);
-						}
-						if (!dict.hasOwnProperty(v)) {
-							dict[v] = 0;
-						}
-						if (x.indexOf('-') !== -1) {
-							dict[v] -= n;
-						} else {
-							dict[v] += n;
-						}
+			var exp = multiply_divide(x) + "";
+			
+			// 非代数加减
+			if (exp.indexOf("^") !== -1) {
+				var mh = exp.match(/[0-9]+\^[0-9]+/);
+				if (mh) {
+					var key = mh[0];
+					var left = key.left("^");
+					var ex = "";
+					var right = key.right("^");
+					var n = Number(right);
+					for (var i = 0; i < n; i++) {
+						ex += " * (" + left + ")";
 					}
-				} else {
-					if (k.indexOf('/') !== -1) {
-						var v = k.replace(/[a-zA-Z]/, '');
-						var m = (v).left('/');
-						var d = (v).right('/');
-						multiply *= Number(m);
-						divide *= Number(d);
-					}
-					if (!dict.hasOwnProperty(k)) {
-						dict[k] = 0;
-					}
-					if (x.indexOf('-') !== -1) {
-						dict[k] -= 1;
-					} else {
-						dict[k] += 1;
-					}
+					var value = eval(ex.replace(' * ', ''));
+					exp = exp.replace(key, value);
 				}
 			}
-		} else {
-			num += Number(val);
+			if (exp.indexOf("/") !== -1) {
+				var left = exp.left("/");
+				var right = exp.right("/");
+				var d = Number(right);
+				multiply = Number(left) * divide + multiply * d;
+				divide *= d;
+			} else {
+				num += Number(exp);
+			}
 		}
 	});
 

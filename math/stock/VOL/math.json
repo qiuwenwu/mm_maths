@@ -1,8 +1,8 @@
 {
 	"key": "VOL",
-	"name": "volume",
-	"title": "取成交量",
-	"group": "stock",
-	"type": "base",
+	"name": "vol",
+	"title": "成交量",
+	"group": "array",
+	"type": "stock",
 	"func_file": "./index.js"
 }

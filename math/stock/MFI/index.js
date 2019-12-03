@@ -1,4 +1,11 @@
-function MFI(higharray, lowarray, closearray, volarray, period) {
+/**
+ * @param {Object} higharray
+ * @param {Object} lowarray
+ * @param {Object} closearray
+ * @param {Object} volarray
+ * @param {Object} period
+ */
+module.exports = function MFI(higharray, lowarray, closearray, volarray, period) {
 	var harr = higharray.slice(0, period).reverse(),
 		larr = lowarray.slice(0, period).reverse(),
 		clarr = closearray.slice(0, period).reverse(),
@@ -24,4 +31,3 @@ function MFI(higharray, lowarray, closearray, volarray, period) {
 	}
 	return (100 - (100 / (1 + (posmf / negmf))));
 }
-exports.MFI = MFI;

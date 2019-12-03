@@ -1,6 +1,6 @@
 const max = require('../array/max');
 
-function TRUERANGE(highs, lows, closes) {
+module.exports = function TRUERANGE(highs, lows, closes) {
 	var tr = [],
 		curr_diff, curr_high_diff, curr_low_diff, i;
 	if (highs.length != lows.length || highs.length != closes.length) {
@@ -17,4 +17,3 @@ function TRUERANGE(highs, lows, closes) {
 	}
 	return tr;
 }
-exports.TRUERANGE = TRUERANGE;

@@ -1,5 +1,5 @@
 /**
- * 公式的加减格式化
+ * 公式的加法格式化
  * @param {String} expression
  * @return {String} 返回格式化后的公式
  */

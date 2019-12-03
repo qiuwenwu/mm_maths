@@ -1,7 +1,7 @@
 const max = require('../array/max');
 const min = require('../array/min');
 
-function WILLR(highs, lows, closes, lookback) {
+module.exports = function WILLR(highs, lows, closes, lookback) {
 	var willr = [],
 		highest_high, lowest_low, curr_close, i;
 	// computing only if highs and lows arrays are of equal length
@@ -20,4 +20,3 @@ function WILLR(highs, lows, closes, lookback) {
 	}
 	return willr;
 }
-exports.WILLR = WILLR;

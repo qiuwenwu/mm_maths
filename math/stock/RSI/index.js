@@ -1,4 +1,4 @@
-function RSI(array, rsiperiod) {
+module.exports = function RSI(array, rsiperiod) {
 	var rsi = [],
 		i, j, loss, gain, diff, avggain, avgloss, first = true;
 	for (i = rsiperiod - 1; i >= 0; i--) {
@@ -34,4 +34,3 @@ function RSI(array, rsiperiod) {
 	}
 	return rsi;
 }
-exports.RSI = RSI;

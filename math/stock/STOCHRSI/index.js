@@ -1,7 +1,7 @@
 const max = require('../array/max');
 const min = require('../array/min');
 
-function STOCHRSI(instruments, rsiperiod) {
+module.exports = function STOCHRSI(instruments, rsiperiod) {
 	var stochrsi = [],
 		rsiarray, rsimin, rsimax, i, arr;
 	for (i = rsiperiod - 1; i >= 0; i--) {
@@ -17,4 +17,3 @@ function STOCHRSI(instruments, rsiperiod) {
 	}
 	return stochrsi;
 }
-exports.STOCHRSI = STOCHRSI;

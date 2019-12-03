@@ -1,5 +1,5 @@
 /**
- * 公式的加减格式化
+ * 公式的乘法格式化
  * @param {String} expression
  * @return {String} 返回格式化后的公式
  */
@@ -24,7 +24,6 @@ module.exports = function format_multiply(expression) {
 			} else {
 				var k = val.replace(/\+/g, '').replace(/\-/g, '').replace(/\*/g, '');
 				if (/^[0-9.]+$/.test(k)) {
-					console.log(val);
 					value += ' ' + val;
 				} else {
 					right += ' ' + val;
@@ -38,5 +37,3 @@ module.exports = function format_multiply(expression) {
 	}
 	return exp.replace('* *', '*').replace('* *', '*').replace('* /', '/').replace('* /', '/');
 };
-
-// .replace(/\*/g, ' *')

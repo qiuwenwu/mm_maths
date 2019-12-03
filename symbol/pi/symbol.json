@@ -1,6 +1,6 @@
 {
-	"key": "π",
-	"alias": "pi",
+	"symbol": "π",
+	"key": "pi",
 	"name": "circumference ratio",
 	"title": "圆周率",
 	"value": "3.141592653589793"

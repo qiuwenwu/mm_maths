@@ -1,5 +1,6 @@
 {
-	"key": "/",
+	"symbol": "/",
+	"key": "denominator",
 	"name": "common denominator",
 	"title": "通分母",
 	"group": "fraction",

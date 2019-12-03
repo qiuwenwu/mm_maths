@@ -2,7 +2,7 @@
 	"key": "EMA",
 	"name": "Exponential Moving Average",
 	"title": "指数移动平均值",
-	"group": "stock",
-	"type": "base",
+	"group": "array",
+	"type": "stock",
 	"func_file": "./index.js"
 }

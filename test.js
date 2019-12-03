@@ -1,7 +1,9 @@
 var Maths = require('./index');
 
-var compute = new Maths(__dirname);
+var maths = new Maths(__dirname);
 
+maths.update(__dirname, "base")
+console.log(maths);
 
 // // 第一步，载入公式
 // compute.load_expression();

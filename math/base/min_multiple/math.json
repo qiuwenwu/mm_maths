@@ -1,5 +1,6 @@
 {
-	"key": "~",
+	"symbol": "~",
+	"key": "min_multiple",
 	"name": "min common multiple",
 	"title": "最小公倍数",
 	"group": "fraction",
