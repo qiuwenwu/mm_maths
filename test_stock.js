@@ -42,7 +42,13 @@ async function test(marketId) {
 			TIME.push(dateTime.toStr('hh:mm:ss'));
 		});
 	}
-
+	H = H.reverse();
+	L = L.reverse();
+	O = O.reverse();
+	C = C.reverse();
+	CHG = CHG.reverse();
+	V = V.reverse();
+	
 	machs.constant = {
 		H: H,
 		HEIG: H,
@@ -52,9 +58,9 @@ async function test(marketId) {
 		OPEN: O,
 		C: C,
 		CLOSE: C,
-		CHG: CHG,
 		V: V,
-		VOL: V
+		VOL: V,
+		CHG: CHG
 	};
 	// console.log(machs.const);
 	var exp = `

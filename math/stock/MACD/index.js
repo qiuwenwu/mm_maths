@@ -9,21 +9,21 @@ const EMA = require('../EMA');
  * @return {type}
  */
 module.exports = function MACD(arr, i12 = 12, i26 = 26, i9 = 9) {
-	var ema12 = EMA(arr, i12),
-		ema26 = EMA(arr, i26),
-		macd = [],
-		i, signal, histogram;
-	for (i = 0; i < ema12.length; i++) {
-		macd.push(ema12[i] - ema26[i]);
+	var ema12 = EMA(arr, i12);
+	var ema26 = EMA(arr, i26);
+	var DIF = [];
+	for(var i = 0; i < ema26.length; i++){
+		DIF.push(ema26[i] - ema12[i]);
 	}
-	signal = EMA(macd, i9);
-	histogram = [];
-	for (i = 0; i < macd.length; i++) {
-		histogram.push(macd[i] - signal[i]);
+	DEA = EMA(DIF, i9);
+	var MACD = [];
+	for(var i = 0; i < DEA.length; i++){
+		var val = ema26[i] - DEA[i];
+		MACD.push(val * 2);
 	}
 	return {
-		macd: macd,
-		signal: signal,
-		histogram: histogram
+		DEA,
+		DIF,
+		MACD
 	};
-};
+}
