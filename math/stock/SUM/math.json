@@ -1,0 +1,8 @@
+{
+	"key": "SUM",
+	"name": "SUM",
+	"title": "周期性求和",
+	"group": "if",
+	"type": "stock",
+	"func_file": "./index.js"
+}

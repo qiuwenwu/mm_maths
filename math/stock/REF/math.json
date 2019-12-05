@@ -1,0 +1,8 @@
+{
+	"key": "REF",
+	"name": "past moment value",
+	"title": "过去某刻值",
+	"group": "array",
+	"type": "stock",
+	"func_file": "./index.js"
+}
