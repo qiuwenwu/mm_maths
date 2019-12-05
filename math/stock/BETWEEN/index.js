@@ -1,12 +1,12 @@
 /**
  * 取数组左边成员
  * @param {Array} arr 数组
- * @param {Number} l 取文本左边
+ * @param {Number} l 取成员起始
  * @param {Number} r 取成员个数
  * @return {Array} 返回数组
  */
 module.exports = function BETWEEN(arr, l, r) {
-	if (r > n) {
+	if (l > r) {
 		return [];
 	}
 	
@@ -19,6 +19,6 @@ module.exports = function BETWEEN(arr, l, r) {
 	if (r > arr.length) {
 		r = arr.length;
 	}
-
-	return arr.slice(l - 1, r);
+	
+	return arr.slice(l, r);
 }
