@@ -1,0 +1,8 @@
+{
+	"key": "AVERAGE",
+	"name": "average",
+	"title": "近似值",
+	"group": "if",
+	"type": "stock",
+	"func_file": "./index.js"
+}

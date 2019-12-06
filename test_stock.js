@@ -5,11 +5,23 @@ const Http = require('./https.js');
 var machs = new Maths();
 machs.update(null, "stock");
 
+/**
+ * @param {Object} H
+ * @param {Object} L
+ * @param {Object} C
+ * @param {Object} V
+ * @param {Object} CHG
+ * @param {Object} DATE
+ */
+async function(H, L, C, V, CHG, DATE) {
+	
+}
+
 async function test(marketId) {
 	var hp = new Http();
 	// "https://www.bw.io/exchange/config/controller/website/marketcontroller/getByWebId";
 
-	var res = await hp.get(`https://www.bw.io/api/data/v1/klines?marketId=${marketId}&type=1D&dataSize=180`);
+	var res = await hp.get(`https://www.bw.io/api/data/v1/klines?marketId=${marketId}&type=1D&dataSize=250`);
 
 	// 最高价
 	var H = [];
@@ -28,9 +40,15 @@ async function test(marketId) {
 	// 时间
 	var TIME = [];
 
+	var d = 7;
+	var now = new Date();
+	var date = now.addDays(-d);
+	console.log(date.toStr('yyyy-MM-dd'));
+	
 	if (res.body) {
 		var arr = res.body.toJson().datas;
-		arr.map(o => {
+		var ar = arr.reverse().slice(0, arr.length - d);
+		ar.map(o => {
 			H.push(Number(o[5]));
 			L.push(Number(o[6]));
 			O.push(Number(o[4]));
@@ -42,12 +60,6 @@ async function test(marketId) {
 			TIME.push(dateTime.toStr('hh:mm:ss'));
 		});
 	}
-	H = H.reverse();
-	L = L.reverse();
-	O = O.reverse();
-	C = C.reverse();
-	CHG = CHG.reverse();
-	V = V.reverse();
 
 	machs.constant = {
 		H: H,
@@ -167,42 +179,55 @@ async function test(marketId) {
 
 	// machs.constant.OPEN = [1, 3, 5];
 	// machs.constant.CLOSE = [1, 3, 5];
-	
+
 	// 早晨十字星 (看涨 +1)
 	exp =
 		`
-		var O1 = REF(OPEN, 2);
-		var C1 = REF(CLOSE, 2);
-		var Cu = UP(CLOSE);
-		var RET = CP(O1, "~=", C1) || CP(O1 * 1.02, "~=", C1) || CP(O1, "~=", C1 * 1.02);
-		return Cu && RET
+		var Yi = AYIN(OPEN, CLOSE, CHG, 4, 0.04);
+		var Sr = ASTAR(OPEN, CLOSE, HIGH, LOW, 3);
+		var Ya = AYANG(OPEN, CLOSE, CHG, 2, 0.04);
+		return Yi && Sr && Ya
 	`;
 	console.log("早晨十字星", machs.run_code(exp));
 
 	// machs.constant.OPEN = [5, 4, 3, 2, 1];
 	// machs.constant.CLOSE = [5.2, 4.1, 3.2, 2, 1.2];
-	
+
 	// 黄昏十字星 (看跌 +1)
 	exp =
 		`
-		var O1 = REF(OPEN, 2);
-		var C1 = REF(CLOSE, 2);
-		var Cd = DOWN(CLOSE);
-		var RET = CP(O1, "~=", C1) || CP(O1 * 1.02, "~=", C1) || CP(O1, "~=", C1 * 1.02);
-		return Cd && RET
+		var Ya = AYANG(OPEN, CLOSE, CHG, 4, 0.04);
+		var Sr = ASTAR(OPEN, CLOSE, HIGH, LOW, 3);
+		var Yi = AYIN(OPEN, CLOSE, CHG, 2, 0.04);
+		return Ya && Sr && Yi
 	`;
 	console.log("黄昏十字星", machs.run_code(exp));
-	
+
 	// 蜻蜓点水 (看涨 +2)
 	exp =
 		`
 		var C1 = REF(CLOSE, 2);
 		var C2 = REF(CLOSE, 3);
-		var Cd = DOWN(CLOSE);
-		return Cd C2 > C1
+		var A1 = RIGHT(CLOSE, 5);
+		var A2 = LEFT(A1, 3);
+		var Ld = DOWN(LOW);
+		var Cn = C1 * 1.04
+		return Ld && C2 > Cn
 	`;
 	console.log("蜻蜓点水", machs.run_code(exp));
-	
+
+	// 旱地拔葱 (看涨 +2)
+	exp =
+		`
+		var H1 = REF(HIGH, 2);
+		var H2 = REF(HIGH, 3);
+		var A1 = RIGHT(HIGH, 6);
+		var A2 = LEFT(A1, 4);
+		var Ha = AP(A2, 0.03);
+		var Hn = H2 * 1.04;
+		return Ha && H1 > Hn
+	`;
+	console.log("旱地拔葱", machs.run_code(exp));
 }
 test(281);
 
