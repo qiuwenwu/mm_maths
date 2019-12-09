@@ -1,7 +1,7 @@
 {
-	"key": "LEFT",
-	"name": "array left",
-	"title": "取数组左边N个成员",
+	"key": "BETWEEN",
+	"name": "array between",
+	"title": "取数日之内 ",
 	"group": "array",
 	"type": "stock",
 	"func_file": "./index.js"

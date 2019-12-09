@@ -1,6 +1,6 @@
 /**
  * 连跌N日
- * @param {Object} arr 数组
+ * @param {Array} arr 跌幅数组
  * @param {Number} period 周期(单位:天)
  * @return {Number} 连涨返回1, 否则返回0
  */

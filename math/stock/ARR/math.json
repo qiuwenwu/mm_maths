@@ -1,7 +1,7 @@
 {
 	"key": "ARR",
-	"name": "Intercept array",
-	"title": "截取数组长度",
+	"name": "ahead array",
+	"title": "推前N个成员",
 	"group": "array",
 	"type": "stock",
 	"func_file": "./index.js"

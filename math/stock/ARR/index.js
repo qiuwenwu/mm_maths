@@ -1,9 +1,9 @@
 /**
- * 截取数组长度
+ * 推前N个成员
  * @param {Array} arr 数组
- * @param {Number} len 截取的长度
+ * @param {Number} n 推前成员数
  * @return {Array} 返回数组
  */
-module.exports = function CLOSE(arr, len) {
-	return arr.slice(0, len);
+module.exports = function ARR(arr, n) {
+	return arr.slice(0, arr.length - n);
 }

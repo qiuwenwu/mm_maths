@@ -27,7 +27,7 @@ module.exports = function CP(arr1, symbol, arr2) {
 			bl = v1 == v2;
 			break;
 		case "~=":
-			bl = (v1 == v2) || (Math.round(v1) == Math.round(v2));
+			bl = (v1 == v2) || (Math.round(v1 * 10) == Math.round(v2 * 10));
 			break;
 	}
 	return bl ? 1 : 0;

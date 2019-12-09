@@ -6,10 +6,10 @@
  */
 module.exports = function REF(arr, n) {
 	var len = arr.length;
-	if (len < n) {
+	if (len <= n) {
 		return 0;
 	}
 	else {
-		return arr[len - n]
+		return arr[len - n - 1];
 	}
 }

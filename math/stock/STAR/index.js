@@ -1,4 +1,3 @@
-
 /**
  * 判断是否十字星
  * @param {Number} open 开盘价
@@ -14,7 +13,7 @@ module.exports = function STAR(open, close, heig, low, n) {
 	}
 	if (heig > open && heig > close) {
 		if (low < open && low < close) {
-			if (close <= open * (1 + n) || close >= open * (1 - n)) {
+			if (close <= open * (1 + n) && close >= open * (1 - n)) {
 				return 1;
 			}
 		}

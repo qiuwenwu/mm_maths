@@ -1,7 +1,7 @@
 {
 	"key": "AYANG",
 	"name": "Array Get YANG line",
-	"title": "阳线",
+	"title": "某日是否阳线",
 	"group": "if",
 	"type": "stock",
 	"func_file": "./index.js"

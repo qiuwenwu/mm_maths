@@ -2,7 +2,7 @@
 	"key": "LLV",
 	"name": "lower price",
 	"title": "取最低价",
-	"group": "array",
+	"group": "number",
 	"type": "stock",
 	"func_file": "./index.js"
 }

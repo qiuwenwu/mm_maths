@@ -19,7 +19,7 @@ module.exports = function MA(arr, period) {
 		return;
 	}
 	var ma = [];
-
+	
 	for (var i = 0; i < period - 1; i++) {
 		ma.push(NaN);
 	}

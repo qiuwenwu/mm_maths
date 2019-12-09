@@ -1,3 +1,4 @@
+const REF = require('../REF');
 const STAR = require('../STAR');
 
 /**
@@ -11,9 +12,9 @@ const STAR = require('../STAR');
  * @return {Number} 判断正确返回1,否则返回0
  */
 module.exports = function ASTAR(arr_open, arr_close, arr_heig, arr_low, idx, n) {
-	var open = arr_open[idx - 1];
-	var close = arr_close[idx - 1];
-	var heig = arr_heig[idx - 1];
-	var low = arr_low[idx - 1];
+	var open = REF(arr_open, idx);
+	var close = REF(arr_close, idx);
+	var heig = REF(arr_heig, idx);
+	var low = REF(arr_low, idx);
 	return STAR(open, close, heig, low, n);
 }

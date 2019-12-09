@@ -9,6 +9,5 @@ module.exports = function RIGHT(arr, n) {
 	{
 		n = arr.length;
 	}
-	var ar = arr.slice().reverse();
-	return ar.slice(0, n).reverse();
+	return arr.slice(arr.length - n, arr.length);
 }
