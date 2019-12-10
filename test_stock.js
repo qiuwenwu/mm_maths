@@ -29,7 +29,7 @@ function run(arr, d) {
 async function test(marketId) {
 	var hp = new Http();
 	// "https://www.bw.io/exchange/config/controller/website/marketcontroller/getByWebId";
-	var res = await hp.get(`https://www.bw.io/api/data/v1/klines?marketId=${marketId}&type=1D&dataSize=360`);
+	var res = await hp.get(`https://www.bw.io/api/data/v1/klines?marketId=${marketId}&type=1D&dataSize=120`);
 	if (res.body) {
 		// 13 曙光初现 11-26
 		// 29 死叉
@@ -42,7 +42,7 @@ async function test(marketId) {
 		// 158 蜻蜓点水 07-04
 		// 164 乌云盖顶 06-27
 		// 249 旱地拔葱 04-02
-		var ret = run(res.body.toJson().datas, 153);
+		var ret = run(res.body.toJson().datas, 0);
 		console.log(ret);
 	}
 }
