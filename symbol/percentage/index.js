@@ -6,7 +6,7 @@ const denominator = require('../../math/base/denominator');
  * @return {number} 返回分数值或分数式
  */
 module.exports = function percentage(val) {
-	var arr = val.match(/([0-9]+.)?[0-9]+%/g);
+	var arr = val.match(/([0-9]+\.)?[0-9]+%/g);
 	if (arr) {
 		for (var i = 0; i < arr.length; i++) {
 			var o = arr[i];

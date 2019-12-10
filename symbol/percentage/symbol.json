@@ -3,5 +3,6 @@
 	"key": "percentage",
 	"name": "percentage",
 	"title": "百分比",
-	"func_file": "./index.js"
+	"func_file": "./index.js",
+	"sort": 8
 }

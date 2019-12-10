@@ -1,4 +1,5 @@
 require('mm_expand');
+const power = require('../../symbol/power');
 const denominator = require('../../math/base/denominator');
 
 /**
@@ -6,7 +7,8 @@ const denominator = require('../../math/base/denominator');
  * @param {String} expression 公式
  */
 function multiply_divide(expression) {
-	expres = expression.replace(/ /g, '').replace(/\*/g, ' *').replace(/\//g, ' /');
+	var expres = power(expression);
+	expres = expres.replace(/ /g, '').replace(/\*/g, ' *').replace(/\//g, ' /');
 	var arr = expres.split(' ');
 	// 统计代数
 	var dict = {};
@@ -140,17 +142,24 @@ function multiply_divide(expression) {
 			left += k
 		} else if (val !== 0) {
 			if (val > 0) {
-				left += k + '^' + val
+				left += " * " + k + '^' + val + " * "
 			} else {
 				var n = -val;
 				if (n === 1) {
 					right += k
 				} else {
-					right += k + '^' + n
+					right += " / " + k + '^' + n + " / "
 				}
 			}
 		}
 	}
+	if(left.startsWith(' * ')){
+		left = left.substring(3);
+	}
+	if(right.endWith(' / ')){
+		right = right.substring(0,right.length - 3);
+	}
+	
 	var result = "";
 	if (!bl) {
 		if (multiply !== 1) {
@@ -176,7 +185,10 @@ function multiply_divide(expression) {
 	if (result.indexOf('/') === 0) {
 		result = 1 + result;
 	}
-	return result;
+	if(result.endsWith(' * ')){
+		result = result.substring(0, result.length - 3);
+	}
+	return result.replace('* /', '/');
 };
 
 module.exports = multiply_divide;

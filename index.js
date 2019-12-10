@@ -25,8 +25,7 @@ class Maths {
 		/**
 		 * 常量（集合）
 		 */
-		this.constant = {};
-		this.const = this.constant;
+		this.const = {};
 
 		/**
 		 * 声明（集合）
@@ -141,6 +140,7 @@ Maths.prototype.clear = function(path, type) {
 Maths.prototype.update = function(path, type) {
 	this.clear(type);
 	this.load(path, type);
+	this.sort();
 };
 
 /**
@@ -184,7 +184,7 @@ Maths.prototype.load_math = function(path, type) {
 };
 
 /**
- * 载入公式
+ * 载入相关函数
  * @param {String} path 检索的路径
  * @param {String} type 类型, 例如：default 默认，base 基础数学
  * @return {String} 成功返回true，失败返回错误类型；
@@ -197,11 +197,35 @@ Maths.prototype.load = function(path, type) {
 };
 
 /**
+ * 函数字典排序
+ */
+Maths.prototype.sort = function() {
+	this.convert = this.sort_sub(this.convert);
+	this.symbol = this.sort_sub(this.symbol);
+	this.identities = this.sort_sub(this.identities);
+};
+
+/**
+ * 函数排序
+ * @param {Object} dict 要排序的字典
+ */
+Maths.prototype.sort_sub = function(dict) {
+	var list = [];
+	for(var k in dict){
+		list.push(dict[k]);
+	}
+	list.sortBy('asc', 'sort');
+	var dt = {};
+	list.map(o => dt[o.key] = o);
+	return dt;
+};
+
+/**
  * 设置常量
  * @param {Object} constant 常量集合，采用键值对的方式 例如：{ a: 10, b: 15, d: [1,-1] }
  */
 Maths.prototype.set_const = function(constant) {
-	$.push(this.constant, constant, true);
+	$.push(this.const, constant, true);
 };
 
 /**
@@ -226,16 +250,53 @@ Maths.prototype.set_know = function(know) {
 Maths.prototype.head = function() {
 	var head = "";
 	for (var k in this.math) {
-		if (!this.constant[k]) {
+		if (!this.const[k]) {
 			head += "var " + k + " = math." + k + ";\r\n"
 		}
 	}
-	for (var k in this.constant) {
-		var value = this.constant[k];
+	for (var k in this.const) {
+		var value = this.const[k];
 		head += "var " + k + " = constant." + k + ";\r\n"
 	}
 	return head;
 }
+
+/**
+ * 转换公式
+ * @param {String} express 表达式
+ * @return {String} 返回推导结果
+ */
+Maths.prototype.convertTo = function(express){
+	// 先进行符号转换
+	var dt = this.symbol;
+	for(var k in dt){
+		var func = this[k];
+		if(func)
+		{
+			express = func(express);
+		}
+	}
+	console.log(express);
+	// 再进行式子转换
+	dt = this.convert;
+	for(var k in dt){
+		var func = this[k];
+		if(func)
+		{
+			express = func(express);
+		}
+	}
+	return express;
+};
+
+/**
+ * 公式推导
+ * @param {String} express 表达式
+ * @return {String} 返回推导结果
+ */
+Maths.prototype.derivation = function(express) {
+	// 符号转换
+};
 
 /**
  * 运行代码
@@ -249,7 +310,7 @@ Maths.prototype.run_code = function(express) {
 	
 	var ret;
 	try {
-		ret = func(this.constant, this);
+		ret = func(this.const, this);
 	} catch (e) {
 		console.log(e);
 		//TODO handle the exception
