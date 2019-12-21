@@ -17,48 +17,84 @@ module.exports = function plus_subtract(expression) {
 
 	var multiply = 0;
 	var divide = 1;
-	
+
 	var multiply_str = "";
 	var divide_str = "";
-	
+
 	// 统计代数个数
 	arr.map(function(x) {
 		var exp = "";
-		
-		if(x.indexOf('-') === 0){
+
+		if (x.indexOf('-') === 0) {
 			exp = " -" + multiply_divide(x.replace('-', '')) + "";
-		}
-		else {
-			if(x.indexOf('+') === 0)
-			{
+		} else {
+			if (x.indexOf('+') === 0) {
 				exp = x.replace('+', '');
-			}
-			else {
+			} else {
 				exp = x;
 			}
 			exp = multiply_divide(exp) + "";
 		}
 		if (/[a-zA-Z]/.test(exp)) {
-			if(exp.indexOf(' -') === 0){
-				var key = exp.replace(' -', '');
-				// 代数加减
-				if(!dict[key])
-				{
-					dict[key] = -1;
+			if (exp.indexOf(' -') === 0) {
+				if (exp.indexOf('^') !== -1 || exp.indexOf('/') !== -1) {
+					var key = exp.replace(' -', '');
+					// 代数加减
+					if (!dict[key]) {
+						dict[key] = -1;
+					} else {
+						dict[key] -= 1;
+					}
+				} else {
+					var key = exp.match(/[a-zA-Z]+/)[0];
+					var str = exp.replace(key, '');
+					var n = 1;
+					if(str)
+					{
+						if(str.trim() == '-')
+						{
+							n = -1;
+						}
+						else {
+							n = Number(str);
+						}
+					}
+					// 代数加减
+					if (!dict[key]) {
+						dict[key] = n;
+					} else {
+						dict[key] += n;
+					}
 				}
-				else {
-					dict[key] -= 1;
-				}
-			}
-			else {
-				var key = exp;
-				// 代数加减
-				if(!dict[key])
-				{
-					dict[key] = 1;
-				}
-				else {
-					dict[key] += 1;
+			} else {
+				if (exp.indexOf('^') !== -1 || exp.indexOf('/') !== -1) {
+					var key = exp;
+					// 代数加减
+					if (!dict[key]) {
+						dict[key] = 1;
+					} else {
+						dict[key] += 1;
+					}
+				} else {
+					var key = exp.match(/[a-zA-Z]+/)[0];
+					var str = exp.replace(key, '');
+					var n = 1;
+					if(str)
+					{
+						if(str.trim() == '-')
+						{
+							n = -1;
+						}
+						else {
+							n = Number(str);
+						}
+					}
+					// 代数加减
+					if (!dict[key]) {
+						dict[key] = n;
+					} else {
+						dict[key] += n;
+					}
 				}
 			}
 		} else {

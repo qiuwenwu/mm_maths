@@ -129,7 +129,7 @@ Maths.prototype.load_sub = function(path, type, expand) {
  * @param {String} type 类型
  */
 Maths.prototype.clear = function(path, type) {
-
+	
 };
 
 /**
@@ -267,6 +267,8 @@ Maths.prototype.head = function() {
  * @return {String} 返回推导结果
  */
 Maths.prototype.convertTo = function(express){
+	var express = this.convert_equal(express);
+	
 	// 先进行符号转换
 	var dt = this.symbol;
 	for(var k in dt){
@@ -276,7 +278,7 @@ Maths.prototype.convertTo = function(express){
 			express = func(express);
 		}
 	}
-	console.log(express);
+	
 	// 再进行式子转换
 	dt = this.convert;
 	for(var k in dt){
@@ -288,6 +290,29 @@ Maths.prototype.convertTo = function(express){
 	}
 	return express;
 };
+
+/**
+ * 等号转换
+ * @param {Object} express
+ * @return {String} 返回公式
+ */
+Maths.prototype.convert_equal = function(express){
+	var left = express.left('=', true);
+	var right = express.right('=');
+	
+	if(right){
+		if(/\+|\-|\*|\//.test(right)) {
+			return left + " - (" + right.trim() + ") = 0";
+		}
+		else {
+			return left + " - " + right.trim() + " = 0";
+		}
+	}
+	else {
+		return left;
+	}
+};
+
 
 /**
  * 公式推导
