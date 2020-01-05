@@ -1,6 +1,6 @@
 {
   "name": "mm_maths",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "这是一个可以将数学公式推导变形，并转成js和计算的模块。",
   "main": "index.js",
   "scripts": {
