@@ -26,7 +26,21 @@ class Maths {
 		 * 常量（集合）
 		 */
 		this.const = {};
-
+		
+		/**
+		 * 变量（集合）用于替换代码中的文字，赋予值。等同于读取缓存值
+		 */
+		this.vars = {
+			// "ma5": "MA(CLOSE, 5)"
+		};
+		
+		/**
+		 * 变量值（集合）用于替换代码中的文字，赋予值。等同于读取缓存值
+		 */
+		this.vals = {
+			// "ma5": []
+		};
+		
 		/**
 		 * 声明（集合）
 		 */
@@ -228,6 +242,25 @@ Maths.prototype.set_const = function(constant) {
 	$.push(this.const, constant, true);
 };
 
+
+/**
+ * 重置变量
+ */
+Maths.prototype.reset_val = function(){
+	for(var k in this.vars){
+		this.vals[k] = this.first_run_code("return " + this.vars[k]);
+	}
+}
+
+/**
+ * 设置变量
+ * @param {Object} vars 变量集合，采用键值对的方式 例如：{ a: null, b: 15, d: [1,-1] }
+ */
+Maths.prototype.set_var = function(vars) {
+	$.push(this.vars, vars, true);
+	this.reset_val();
+};
+
 /**
  * 下定义
  * @param {Object} def 定义集合, 例如：
@@ -248,17 +281,20 @@ Maths.prototype.set_know = function(know) {
  * 设置函数头
  */
 Maths.prototype.head = function() {
-	var head = "";
-	for (var k in this.math) {
-		if (!this.const[k]) {
-			head += "var " + k + " = math." + k + ";\r\n"
+	if(!this.head_value){
+		var head = "";
+		for (var k in this.math) {
+			if (!this.const[k]) {
+				head += "var " + k + " = math." + k + ";\r\n"
+			}
 		}
+		for (var k in this.const) {
+			var value = this.const[k];
+			head += "var " + k + " = constant." + k + ";\r\n"
+		}
+		this.head_value = head;
 	}
-	for (var k in this.const) {
-		var value = this.const[k];
-		head += "var " + k + " = constant." + k + ";\r\n"
-	}
-	return head;
+	return this.head_value;
 }
 
 /**
@@ -268,7 +304,6 @@ Maths.prototype.head = function() {
  */
 Maths.prototype.convertTo = function(express){
 	var express = this.convert_equal(express);
-	
 	// 先进行符号转换
 	var dt = this.symbol;
 	for(var k in dt){
@@ -278,7 +313,6 @@ Maths.prototype.convertTo = function(express){
 			express = func(express);
 		}
 	}
-	
 	// 再进行式子转换
 	dt = this.convert;
 	for(var k in dt){
@@ -324,11 +358,22 @@ Maths.prototype.derivation = function(express) {
 };
 
 /**
+ * 更新标签
+ * @param {String} express 表达式
+ */
+Maths.prototype.update_tag = function(express) {
+	for(var k in this.vars){
+		express = express.replaceAll(this.vars[k], "vals." + k);
+	}
+	return express;
+}
+
+/**
  * 运行代码
  * @param {String} express 表达式
  * @return {Object} 执行结果
  */
-Maths.prototype.run_code = function(express) {
+Maths.prototype.first_run_code = function(express) {
 	var head = this.head();
 	var exp = head + express;
 	let func = new Function('constant', 'math', exp);
@@ -336,6 +381,25 @@ Maths.prototype.run_code = function(express) {
 	var ret;
 	try {
 		ret = func(this.const, this);
+	} catch (e) {
+		console.log(e);
+	}
+	return ret;
+};
+
+/**
+ * 运行代码
+ * @param {String} express 表达式
+ * @return {Object} 执行结果
+ */
+Maths.prototype.run_code = function(express) {
+	var head = this.head();
+	var exp = head + this.update_tag(express);
+	let func = new Function('constant', 'math', 'vals', exp);
+	
+	var ret;
+	try {
+		ret = func(this.const, this, this.vals);
 	} catch (e) {
 		console.log(e);
 		//TODO handle the exception

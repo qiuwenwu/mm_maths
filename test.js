@@ -12,7 +12,7 @@ var consts = {
 };
 maths.set_const(consts);
 
-// // 第三步，转换公式
+// 第三步，转换公式
 var expression = "y = abc * ab * 3c * 2";
 var express = maths.convertTo(expression);
 console.log('打印公式: ', express);
